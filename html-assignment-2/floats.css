@@ -8,6 +8,8 @@
 }
 
 body {
+  margin: 0;
+  padding: 0;
 }
 
 header {
@@ -19,24 +21,27 @@ header {
 
 section {
   height: 70px;
+  width: 100%;
+  display: inline-block;
 }
 
 #left {
-  width:33%;
+  width:33.3%;
   background-color: #666;
-  display: inline-block;
+  float:left;
 }
 
 #middle {
-  width:33%;
+  width:33.3%;
   background-color: #888;
-  display: inline-block;
+  float:none;
+  margin-bottom: 20px;
 }
 
 #right {
-  width:33%;
+  width:33.3%;
   background-color: #666;
-  display: inline-block;
+  float:right;
 }
 
 #full {
