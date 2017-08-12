@@ -1,0 +1,29 @@
+#fixed-div
+{
+    position: fixed;
+    width: 30%;
+    height: 50px;
+    text-align: center;
+    background-color: #aaa;
+}
+
+#relative-div
+{
+    position: relative;
+    width: 100%;
+    height: 200px;
+    vertical-align: middle;
+    text-align: center;
+    background-color: #ddd;
+}
+
+#absolute-div
+{
+    position: absolute;
+    width: 30%;
+    height: 50px;
+    right: -30px;
+    bottom:0;
+    text-align: center;
+    background-color: #aaa;
+}
