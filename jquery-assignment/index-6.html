@@ -15,6 +15,10 @@
 <h3 id="grilledcheese">Grilled Cheese</h3>
 <h3 id="roastbeef">Roast Beef</h3>
 
+<div>
+    <p id="output"></p>
+</div>
+
 <div id="image-div"></div>
 
 <script type="text/javascript">
@@ -36,6 +40,7 @@
 
         var imageDiv = $("#image-div");
         var newImage = $("<img>");
+        var output_p = $("#output");
         // ...
 
         // FUNCTIONS
@@ -48,9 +53,9 @@
             newImage.attr("src", "pbj.jpg");
             imageDiv.append(newImage);
             pbj_counter++;
-            alert("You've eaten a PBJ: " + pbj_counter + " times!\n" +
-                  "You've eaten a Grilled Cheese: " + grilledcheese_counter + " times!\n" +
-                  "You've eaten a Roast Beef: " + roastbeef_counter + " times!\n");
+            output_p.html("You've eaten a PBJ: " + pbj_counter + " times!<br/>"
+                +"You've eaten a Grilled Cheese: " + grilledcheese_counter + " times!<br/>"
+                +"You've eaten a Roast Beef: " + roastbeef_counter + " times!");
         });
 
         $("#grilledcheese").on("click", function () {
@@ -58,9 +63,9 @@
             newImage.attr("src", "grilled-cheese.jpg");
             imageDiv.append(newImage);
             grilledcheese_counter++;
-            alert("You've eaten a PBJ: " + pbj_counter + " times!\n" +
-                "You've eaten a Grilled Cheese: " + grilledcheese_counter + " times!\n" +
-                "You've eaten a Roast Beef: " + roastbeef_counter + " times!\n");
+            output_p.html("You've eaten a PBJ: " + pbj_counter + " times!<br/>"
+                         +"You've eaten a Grilled Cheese: " + grilledcheese_counter + " times!<br/>"
+                         +"You've eaten a Roast Beef: " + roastbeef_counter + " times!");
         });
 
         $("#roastbeef").on("click", function () {
@@ -68,9 +73,9 @@
             newImage.attr("src", "roast-beef.jpg");
             imageDiv.append(newImage);
             roastbeef_counter++;
-            alert("You've eaten a PBJ: " + pbj_counter + " times!\n" +
-                "You've eaten a Grilled Cheese: " + grilledcheese_counter + " times!\n" +
-                "You've eaten a Roast Beef: " + roastbeef_counter + " times!\n");
+            output_p.html("You've eaten a PBJ: " + pbj_counter + " times!<br/>"
+                +"You've eaten a Grilled Cheese: " + grilledcheese_counter + " times!<br/>"
+                +"You've eaten a Roast Beef: " + roastbeef_counter + " times!");
         });
 
         // ...
