@@ -3,6 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>JavaScript Content!</title>
+    <script src="jquery.js"></script>
+    <style>
+        .my-paragraph
+        {
+            letter-spacing: 2px;
+        }
+    </style>
 </head>
 <body>
 
@@ -29,7 +36,7 @@
 
     // 1. Create code that "grabs" the div with the matching id (#drink-options);
     // ...
-    var targetDiv = document.getElementById("drink-options");
+    //var targetDiv = $("#drink-options");
 
     // ...
 
@@ -37,12 +44,20 @@
     // 2. Create a for loop that creates HTML content of all the drinks using JavaScript.
     // HINT: You will need to use each of the following methods: createElement, innerHTML, appendChild
     // ...
-    for(var i=0;i<drinkList.length;i++)
-    {
-        var newDiv = document.createElement("p");
-        newDiv.innerHTML = drinkList[i];
-        targetDiv.appendChild(newDiv);
-    }
+//    for(var i=0;i<drinkList.length;i++)
+//    {
+//        var newDiv = document.createElement("");
+//        newDiv.innerHTML = drinkList[i];
+//        targetDiv.appendChild(newDiv);
+//    }
+
+    $.each(drinkList, function (index, value) {
+        var newP = $("<p>");
+        newP.html(value);
+        newP.attr('class', 'my-paragraph');
+        //$newParagraph = "<p>" + value + "</p>";
+        $("#drink-options").append(newP);
+    });
 
     // ...
 

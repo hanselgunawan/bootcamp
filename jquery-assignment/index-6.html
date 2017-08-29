@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Trigger Clicked</title>
+
+    <!-- Added link to the jQuery library -->
+    <script src="jquery.js"></script>
+
+</head>
+<body>
+
+<h1>Click to Eat Sandwich</h1>
+<h3 id="pbj">Peanut Butter Jelly</h3>
+<h3 id="grilledcheese">Grilled Cheese</h3>
+<h3 id="roastbeef">Roast Beef</h3>
+
+<div id="image-div"></div>
+
+<script type="text/javascript">
+
+    // This document.ready isn't necessary in this example... but is needed in cases where the HTML is complex.
+    // This code makes sure that the JavaScript doesn't get run until the HTML is finished loading
+    // It's useful to become familiar with now.
+
+    $(document).ready(function() {
+
+        // VARIABLES
+        // ====================================================================
+        // Here we create variables for tracking the number of sandwiches eaten
+        // ...
+        var pbj_counter = 0;
+        var grilledcheese_counter = 0;
+        var roastbeef_counter = 0;
+
+
+        var imageDiv = $("#image-div");
+        var newImage = $("<img>");
+        // ...
+
+        // FUNCTIONS
+        // ====================================================================
+        // Here we create various on "click" functions which capture the clicks
+        // Inside each click event is the code to create an alert, update the counter, then show the updated count.
+        // ...
+        $("#pbj").on("click", function () {
+            imageDiv.html = newImage;//its like create new element on Vanilla JS
+            newImage.attr("src", "pbj.jpg");
+            imageDiv.append(newImage);
+            pbj_counter++;
+            alert("You've eaten a PBJ: " + pbj_counter + " times!\n" +
+                  "You've eaten a Grilled Cheese: " + grilledcheese_counter + " times!\n" +
+                  "You've eaten a Roast Beef: " + roastbeef_counter + " times!\n");
+        });
+
+        $("#grilledcheese").on("click", function () {
+            imageDiv.html = newImage;
+            newImage.attr("src", "grilled-cheese.jpg");
+            imageDiv.append(newImage);
+            grilledcheese_counter++;
+            alert("You've eaten a PBJ: " + pbj_counter + " times!\n" +
+                "You've eaten a Grilled Cheese: " + grilledcheese_counter + " times!\n" +
+                "You've eaten a Roast Beef: " + roastbeef_counter + " times!\n");
+        });
+
+        $("#roastbeef").on("click", function () {
+            imageDiv.html = newImage;
+            newImage.attr("src", "roast-beef.jpg");
+            imageDiv.append(newImage);
+            roastbeef_counter++;
+            alert("You've eaten a PBJ: " + pbj_counter + " times!\n" +
+                "You've eaten a Grilled Cheese: " + grilledcheese_counter + " times!\n" +
+                "You've eaten a Roast Beef: " + roastbeef_counter + " times!\n");
+        });
+
+        // ...
+
+    });
+
+</script>
+
+</body>
+</html>
