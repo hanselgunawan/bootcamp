@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>This Example</title>
+</head>
+<body>
+
+<h1>Make sure to view the console to see the action!</h1>
+
+<script type="text/javascript">
+
+    // EXAMPLE ONE:
+    // --------------------------------------------------
+    // What is "this" going to print?
+
+    console.log(this); //return the whole HTML object
+
+
+    // EXAMPLE TWO:
+    // --------------------------------------------------
+    // What is "this" going to print?
+
+    function myFunction() {
+        console.log(this); //return the whole HTML object
+    }
+    myFunction();
+
+    // EXAMPLE THREE (IMPORTANT):
+    // --------------------------------------------------
+    // What is "someObj.say()" going to print?
+
+    var someObj = {
+        name: "Red Hat",
+        say: function() {
+            console.log(this.name); //Red Hat
+        }
+    };
+    someObj.say();
+
+
+    // EXAMPLE FOUR (BONUS, TRICKY!):
+    // --------------------------------------------------
+    // What is "myObj.yell()" going to print? Why?
+
+    var myObj = {
+        name: "",
+        yell: function() {
+            this.name = "Star Powerup";//THIS over here is refer to myObj object
+
+            var changeName = function(newName) {
+                this.name = newName; //THIS over here is refer to Window, because its 2 level down the myObj
+                                    //THIS over here can't access this.name, because its on the different function
+            };
+            changeName("Blue Shell");
+            console.log(this);//return the whole Object
+        }
+    };
+    myObj.yell();
+
+
+    // EXAMPLE FIVE (BONUS, TRICKY!):
+    // --------------------------------------------------
+    // What is "myObj.yell()" going to print? Why?
+
+    var myObj = {
+        name: "",
+        yell: function() {
+
+            // This line is important!
+            var thisObject = this;
+
+            this.name = "Star Powerup";
+            var changeName = function(newName) {
+                thisObject.name = newName;
+            };
+            changeName("Blue Shell");
+            console.log(thisObject);//return the whole Object
+
+            //console.log(this) --> return the whole Object
+        }
+    };
+    myObj.yell();
+
+</script>
+</body>
+</html>
