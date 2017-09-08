@@ -33,11 +33,74 @@
     }
   };
 
-  function findUpTag(item, theCodWeb) {
-      while (item.parentNode) {
-          item = item.parentNode;
-          if (item.tagName === theCodWeb)
-              return item;
+//  function findUpTag(object, keyvalue) {
+//      var found = false;
+//      for(var property in object)
+//      {
+//          if(object.hasOwnProperty(property))
+//          {
+//              if(typeof object[property] === 'object')
+//              {
+//                  //find again until its not an Object
+//                  found = findUpTag(object[property], keyvalue);
+//                  if(found) return found;
+//                  console.log(object[property]);
+//              }
+//              else
+//              {
+//                  key = Object.keys(keyvalue)[0];
+//                  if(property === key && object[key]===keyvalue[key])
+//                  {
+//                      console.log('searchObject ' + keyvalue[key] + ' found');
+//                      console.log("hihihi");
+//                      return object;
+//                  }
+//              }
+//          }
+//      }
+//  }
+
+
+  //WILLIAM'S SOLUTION
+//  function search(word, myObj)
+//  {
+//      for(var i in myObj)
+//      {
+//          if(myObj[i] == word)
+//              return true;
+//
+//          if(typeof myObj[i] == 'object')
+//          {
+//              var res = search(word, myObj[i]);
+//              if(res == true && myObj[i].constructor.name == 'Array') // kalo di dalem array, naik 1 ke parent Object nya
+//                                                                      // buat biggerWeb.items & tinyWeb.items, which are Array
+//                  return true;
+//              else if(res == true)
+//                  return i;
+//              else if(typeof res == 'string')//buat item.comb, which is STRING
+//                  return res;
+//          }
+//      }
+//  }
+
+
+  //HANSEL'S SOLUTION
+  function findParent(word, myObj)
+  {
+      for(var key in myObj)
+      {
+          if(myObj[key] === word) return true; //if user search the property of the object, return the object and stop searching (base case)
+
+          if(typeof myObj[key] === 'object')
+          {
+              var res = findParent(word, myObj[key]);
+              if(Array.isArray(myObj[key]) && myObj[key].includes(word)) return true;
+              else if(res === true) return key;
+              else if(typeof res==='string')
+              {
+                  return res;
+              }
+          }
       }
       return null;
   }
@@ -52,8 +115,10 @@
 //  console.log("I found my " + theCobWeb.otherBigWeb.item + "!");
 //  console.log("I found my " + theCobWeb.biggestWeb.biggerWeb.smallerWeb.tinyWeb.items[3] + "!");
 
-  console.log(findUpTag("glasses", theCobWeb));
+  //search("glasses", theCobWeb);
+  //findUpTag(theCobWeb, "glasses");
 
+  findParent("glasses", theCobWeb);
 
 // Bonus (Extra Hard): It's impossible to complete this in the allotted time. Take this home as a challenge and bring it back to your TA/Instructor for the solution.
 //Create a function using JavaScript (NOT jQuery) for which you can pass the name of an item and theCobWeb
