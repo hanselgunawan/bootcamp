@@ -10,14 +10,14 @@
 </head>
 <body>
 
-  <h1>Open the console to see the action!</h1>
+  <h1>.</h1>
 
   <script>
 
   // Here we are given a cob-web of items. Let's dig in and grab the items we need.
   var theCobWeb = {
     biggestWeb: {
-      item: "comb",
+      item: ["comb"],
       biggerWeb: {
         items: ["glasses", "paperclip", "bubblegum"],
         smallerWeb: {
@@ -62,47 +62,71 @@
 
 
   //WILLIAM'S SOLUTION
-//  function search(word, myObj)
-//  {
-//      for(var i in myObj)
-//      {
-//          if(myObj[i] == word)
-//              return true;
-//
-//          if(typeof myObj[i] == 'object')
-//          {
-//              var res = search(word, myObj[i]);
-//              if(res == true && myObj[i].constructor.name == 'Array') // kalo di dalem array, naik 1 ke parent Object nya
-//                                                                      // buat biggerWeb.items & tinyWeb.items, which are Array
-//                  return true;
-//              else if(res == true)
-//                  return i;
-//              else if(typeof res == 'string')//buat item.comb, which is STRING
-//                  return res;
-//          }
-//      }
-//  }
+  function search(word, myObj)
+  {
+      for(var i in myObj)
+      {
+          if(myObj[i] == word)
+              return true;
+
+          if(typeof myObj[i] == 'object')
+          {
+              var res = search(word, myObj[i]);
+              if(res == true && myObj[i].constructor.name == 'Array') // kalo di dalem array, naik 1 ke parent Object nya
+                                                                      // buat biggerWeb.items & tinyWeb.items, which are Array
+                  return true;
+              else if(res == true)
+                  return i;
+              else if(typeof res == 'string')//buat item.comb, which is STRING
+                  return res;
+          }
+      }
+  }
 
 
   //HANSEL'S SOLUTION
-  function findParent(word, myObj)
-  {
-      for(var key in myObj)
-      {
-          if(myObj[key] === word) return true; //if user search the property of the object, return the object and stop searching (base case)
+//  function findParent(word, myObj)
+//  {
+//      for(var key in myObj)
+//      {
+//          if(myObj[key] === word) return true; //if user search the property of the object, return the object and stop searching (base case)
+//
+//          if(typeof myObj[key] === 'object')
+//          {
+//              var res = findParent(word, myObj[key]);
+//              if(Array.isArray(myObj[key]) && myObj[key].includes(word)) return true;
+//              else if(res === true) return key;
+//              else if(typeof res==='string')
+//              {
+//                  return res;
+//              }
+//          }
+//      }
 
-          if(typeof myObj[key] === 'object')
-          {
-              var res = findParent(word, myObj[key]);
-              if(Array.isArray(myObj[key]) && myObj[key].includes(word)) return true;
-              else if(res === true) return key;
-              else if(typeof res==='string')
-              {
-                  return res;
-              }
-          }
-      }
-      return null;
+
+      //backup
+
+//          if(myObj[key].item === word || myObj[key].items.includes(word)) return key;
+//
+//          var res = findParent(word, myObj[key]);
+//          return res;
+//          if(typeof myObj[key] === 'Array' && !myObj[key].items.includes(word))
+//          {
+//              return "haha";
+//          }
+//          else if(typeof myObj[key] !== 'Array' && myObj[key].item === word)
+//          {
+//              return "haha";
+//          }
+
+//        if(obj.item === label || obj.items === label) { return obj; }
+//        for(var i in obj) {
+//            if(obj.hasOwnProperty(i)){
+//                var foundLabel = findParent(obj[i], label);
+//                if(foundLabel) { return foundLabel; }
+//            }
+//        }
+      //return null;
   }
 
 // Create the code necessary to print each of the following lines using the object above:
@@ -118,7 +142,7 @@
   //search("glasses", theCobWeb);
   //findUpTag(theCobWeb, "glasses");
 
-  findParent("glasses", theCobWeb);
+  findParent("comb", theCobWeb);
 
 // Bonus (Extra Hard): It's impossible to complete this in the allotted time. Take this home as a challenge and bring it back to your TA/Instructor for the solution.
 //Create a function using JavaScript (NOT jQuery) for which you can pass the name of an item and theCobWeb
