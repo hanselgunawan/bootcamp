@@ -19,6 +19,18 @@
     // Create an AJAX call to retrieve data Log the data in console
     // Log the data in HTML
     // Scream Ushindi (victory in Swahili)! at the top of your lungs
+    var APIKey = "166a433c57516f51dfab1f7edaed8413";
+
+    // Here we are building the URL we need to query the database
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=Jakarta,Indonesia&appid=" + APIKey;
+
+    // We then created an AJAX call
+    var weather = $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).done(function(response) {
+        $(".city").html(JSON.stringify(response));
+    });
   </script>
 
 </body>
