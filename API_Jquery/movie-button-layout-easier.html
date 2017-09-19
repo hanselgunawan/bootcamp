@@ -59,7 +59,7 @@
 
         // Write code to grab the text the user types into the input field
         // Write code to add the new movie into the movies array
-          let movieName = $("#movie-input").val();
+          let movieName = $("#movie-input").val().trim();
           movies.push(movieName);
 
         // The renderButtons function is called, rendering the list of movie buttons
