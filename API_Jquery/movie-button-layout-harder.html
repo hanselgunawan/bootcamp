@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Favorite Movies</title>
+  <style type="text/css">
+    button,
+    div,
+    form,
+    input {
+      margin: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>Movie Search</h1>
+
+    <!-- Movies will get dumped here -->
+    <div id="movies-view"></div>
+
+    <form id="movie-form">
+      <label for="movie-input">Add a Movie Bro</label>
+      <input type="text" id="movie-input"><br>
+
+      <!-- Button triggers new movie to be added -->
+      <input id="add-movie" type="submit" value="Add a Movie Bro">
+    </form>
+    <div id="dom"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      // Initial array of movies
+      var movies = ["The Matrix", "The Notebook", "Mr. Nobody", "The Lion King"];
+
+      // Function for displaying movie data
+      function renderButtons() {
+          $("#movies-view").empty();
+          // Loop through the array of movies, then generate buttons for each movie in the array
+          for(let i in movies)
+          {
+              $("#movies-view").append("<button class='see-dom'>"+movies[i]+"</button>");
+          }
+      }
+
+      // This function handles events where one button is clicked
+      $("#add-movie").on("click", function() {
+
+          event.preventDefault();
+
+          // Write code to grab the text the user types into the input field
+          // Write code to add the new movie into the movies array
+          let movieName = $("#movie-input").val();
+          movies.push(movieName);
+
+          // The renderButtons function is called, rendering the list of movie buttons
+          renderButtons();
+
+      });
+
+      $(document).on("click", ".see-dom", function (event) {
+          var movie = $(event.target).text();
+
+          // Here we construct our URL
+          var queryURL = "http://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=40e9cece";
+
+          // Write code between the dashes below to hit the queryURL with $ajax, then take the response data
+          // and display it in the div with an id of movie-view
+
+          // YOUR CODE GOES IN THESE DASHES. DO NOT MANUALLY EDIT THE HTML ABOVE
+
+          // =================================================================
+
+          $.ajax({
+              url: queryURL,
+              method: "GET"
+          }).done(function(response) {
+              $("#dom").html(JSON.stringify(response));
+          });
+      });
+
+      // Calling the renderButtons function to display the initial list of movies
+      renderButtons();
+    </script>
+  </div>
+</body>
+
+</html>
