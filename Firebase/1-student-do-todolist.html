@@ -37,9 +37,34 @@
   <script>
     //  ============================= START CODING BELOW! =============================================
 
+    putOnPage();
     // Create an initial toDoCount variable
-      var toDoCount = 0;
+
+
+    function putOnPage()
+    {
+        $("#to-dos").empty();
+        if(localStorage.getItem("myToDoArray") !== null)
+        {
+            for(var i = 0; i < JSON.parse(localStorage.getItem("myToDoArray")).length; i++)
+            {
+                var newP = $("<p>");
+                newP.text(JSON.parse(localStorage.getItem("myToDoArray"))[i]);
+                $("#to-dos").append(newP);
+                var newBtn = $("<button>");
+                newBtn.attr("data-to-do", JSON.parse(localStorage.getItem("myToDoCounter"))[i]);
+                newBtn.addClass("checkbox");
+                newBtn.text("✓");
+                newP = newP.prepend(newBtn);
+            }
+        }
+    }
+
     //  On Click event associated with the add-to-do function
+    var toDoCount = 0;
+    var toDoArr = [];
+    var toDoCountArr = [];
+
     $("#add-to-do").on("click", function(event) {
 
       // prevent form from submitting
@@ -47,15 +72,22 @@
 
       // Get the to-do "value" from the textbox and store it a variable
       var toDoName = $("#to-do").val().trim();
+      //toDoArr.push(toDoName);
 
-      // Create a new variable that will hold a "<p>" tag.
-      // Then give it an ID in the following form:
-      // "item-4" or "item-3" or "item-99", where the number is equal to toDoCount.
-      // Then append the to-do "value" as text to this <p> element.
+      if(JSON.parse(localStorage.getItem("myToDoArray")) !== null)toDoArr = JSON.parse(localStorage.getItem("myToDoArray"));
+      toDoArr.push(toDoName);
+      localStorage.setItem("myToDoArray", JSON.stringify(toDoArr));
+      console.log(JSON.parse(localStorage.getItem("myToDoArray")));
+
       var newP = $("<p>");
       newP.text(" " + toDoName);
       newP.attr("id", "item-" + toDoCount);
       $("#to-dos").append(newP);
+      //toDoCountArr.push(toDoCount);
+
+      if(JSON.parse(localStorage.getItem("myToDoCounter")) !== null) toDoCountArr = JSON.parse(localStorage.getItem("myToDoCounter"));
+      toDoCountArr.push(toDoCount);
+      localStorage.setItem("myToDoCounter", JSON.stringify(toDoCountArr));
 
       // Create a button with unique identifiers based on what number it is in the list. Again use jQuery to do this.
       // Give your button a data attribute called data-to-do and a class called "checkbox".
@@ -87,7 +119,58 @@
       var toDoNumber = $(event.target).data("to-do");
 
       // Select and Empty the specific <p> element that previously held the to do item number.
-      $("#item-"+toDoNumber).remove();
+      //$("#item-"+toDoNumber).remove();
+      var localToDoArr = JSON.parse(localStorage.getItem("myToDoArray"));
+      var localToDoCounterArr = JSON.parse(localStorage.getItem("myToDoCounter"));
+
+      localToDoArr.splice(toDoNumber, 1);
+      localToDoCounterArr.splice(toDoNumber, 1);
+
+      localStorage.setItem("myToDoArray", localToDoArr);
+      localStorage.setItem("myToDoCounter", localToDoCounterArr);
+
+      putOnPage();
+
+
+      /*
+       var arr = [];
+       $("#add-to-do").on("click", function(event) {
+       event.preventDefault();
+       var value = $("#to-do").val().trim();
+       arr.push(value);
+       localStorage.setItem("arr_ls", JSON.stringify(arr));
+       display();
+       });
+
+       $(document.body).on("click", ".checkbox", function() {
+       var index = $(this).attr("count");
+       arr.splice(index, 1);
+       localStorage.setItem("arr_ls", JSON.stringify(arr));
+       display();
+       });
+
+
+       var display = function(){
+       $("#to-dos").empty();
+       var list = JSON.parse(localStorage.getItem("arr_ls"));
+       if (list == null) return;
+       else arr = list;
+       for (var i in list){
+       var $div = $("<div>");
+       var $btn = $("<button>");
+
+       $btn.attr("count", i);
+       $btn.addClass("checkbox");
+       $btn.append("✓");
+
+       $div.append($btn);
+       $div.append(" "+list[i]);
+       $("#to-dos").append($div)
+       $("#to-do").val("");
+       }
+       }
+       display();
+       */
 
     });
   </script>
