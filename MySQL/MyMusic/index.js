@@ -65,6 +65,41 @@ function askASong()
         ])
         .then(function(answer) {
             quertInsertSong(answer.song_title, answer.song_artist, answer.song_genre);
+    });
+}
+
+function askChangeToWhat(update_text, songID)
+{
+    let update_choice = update_text.toLowerCase();
+    inquirer
+        .prompt([
+            {
+                message: "What do you want to change the " + update_choice + " to?",
+                name: "update"
+            }
+        ])
+        .then(function(answer) {
+            askChangeToWhat(answer.update, songID);
+    });
+}
+
+function askByID(songID)
+{
+    connection.query("SELECT * FROM fav_music WHERE musicId=?", [songID], function(error, result) {
+        console.log(result[i].musicId + " | " + result[i].title + " | " + result[i].artist + " | " + result[i].genre);
+        console.log("-----------------------------------");
+    });
+    inquirer
+        .prompt([
+            {
+                type: "list",
+                message: "What do you want to update?",
+                name: "update",
+                choices: ["Title", "Artist", "Genre"]
+            }
+        ])
+        .then(function(answer) {
+            askChangeToWhat(answer.update, songID);
         });
 }
 
