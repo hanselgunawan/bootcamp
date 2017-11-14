@@ -56,7 +56,7 @@ app.get("/all", function(req, res) {
   res.json(characters);
 });
 
-// Search for Specific Character (or all characters) - provides JSON
+// // Search for Specific Character (or all characters) - provides JSON
 app.get("/api/:characters?", function(req, res) {
   var chosen = req.params.characters;
 
@@ -84,7 +84,7 @@ app.post("/api/new", function(req, res) {
 
   characters.push(newcharacter);
 
-  res.json(newcharacter);
+  res.json({name: 'William'});
 });
 
 // Starts the server to begin listening
