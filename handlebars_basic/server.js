@@ -21,70 +21,79 @@ app.set("view engine", "handlebars");
 //   }
 // ];
 
-var icecreams = [
-    {name: "vanilla", price: 10, awesomeness: 3},
-    {name: "chocolate", price: 4, awesomeness: 8},
-    {name: "banana", price: 1, awesomeness: 1},
-    {name: "greentea", price: 5, awesomeness: 7},
-    {name: "jawbreakers", price: 6, awesomeness: 2}
+var animals = [
+    {type: "dog", pet: true, fierceness: 3},
+    {type: "cat", pet: true, fierceness: 8},
+    {type: "gorilla", pet: false, fierceness: 1},
+    {type: "king kong", pet: false, fierceness: 7},
+    {type: "rabbit", pet: true, fierceness: 2}
 ];
 
 // Routes
-app.get("/weekday", function(req, res) {
-  res.render("index", lunches[0]);
+app.get("/pets", function(req, res) {
+    let pets = [];
+    for(let i =0;i<animals.length;i++)
+    {
+        if(animals[i].pet===true) pets.push(animals[i]);
+    }
+    res.render("all-lunches", {
+        petArr: pets,
+        title: "All Pets"
+    });
 });
 
-app.get("/weekend", function(req, res) {
-  res.render("index", lunches[1]);
+app.get("/non-pets", function(req, res) {
+    let pets = [];
+    for(let i =0;i<animals.length;i++)
+    {
+        if(animals[i].pet===false) pets.push(animals[i]);
+    }
+    res.render("all-lunches", {
+        petArr: pets,
+        title: "Non Pets"
+    });
 });
 
-app.get("/lunches", function(req, res) {
-  res.render("all-lunches", {
-    foods: lunches,
-    eater: "david"
-  });
-});
-
-app.get("/icecream/:name", function(req, res) {
-    let index = -1;
-    for(let i = 0; i<icecreams.length; i++)
-    {
-      if(icecreams[i].name === req.params.name)
-      {
-        index = i;
-        break;
-      }
-    }
-    if(index !== -1)
-    {
-        res.render("index", icecreams[index]);
-    }
-    else
-    {
-        res.render("index", {
-            name: "Not Found",
-            price: 0,
-            awesomeness: 0
-        });
-    }
+app.get("/animals/:name", function(req, res) {
+    // let index = -1;
+    // for(let i = 0; i<icecreams.length; i++)
+    // {
+    //   if(icecreams[i].name === req.params.name)
+    //   {
+    //     index = i;
+    //     break;
+    //   }
+    // }
+    // if(index !== -1)
+    // {
+    //     res.render("index", icecreams[index]);
+    // }
+    // else
+    // {
+    //     res.render("index", {
+    //         name: "Not Found",
+    //         price: 0,
+    //         awesomeness: 0
+    //     });
+    // }
 
     //OR
 
-    // for(let i = 0; i<icecreams.length; i++)
-    // {
-    //     if(icecreams[i].name === req.params.name)
-    //     {
-    //         return res.render("index", icecreams[i]);
-    //     }
-    // }
+    for(let i = 0; i<animals.length; i++)
+    {
+        if(animals[i].type === req.params.name)
+        {
+            return res.render("index", animals[i]);
+        }
+    }
 });
 
-app.get("/icecream", function(req, res) {
-    res.render("all-lunches", {
-        ice: icecreams,
-        eater: "david"
-    });
-});
+// app.get("/icecream", function(req, res) {
+//     res.render("all-lunches", {
+//         ice: icecreams,
+//         eater: "david"
+//     });
+// });
 
 // Initiate the listener.
 app.listen(port);
